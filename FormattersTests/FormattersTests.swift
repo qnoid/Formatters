@@ -16,13 +16,19 @@ class FormattersTests: XCTestCase {
     {
         let foo = Foo(int: 1)
         
-        XCTAssertEqual("1", foo.formatter().format())
+        XCTAssertEqual("1", foo.formatter().format  { foo in
+            return "\(foo.int)"
+            }
+        )
     }
     
     func testBar()
     {
         let bar = Bar(string: "foo")
         
-        XCTAssertEqual("foo", bar.formatter().format())
+        XCTAssertEqual("foo", bar.formatter().format { bar in
+            return bar.string
+            }
+        )
     }
 }

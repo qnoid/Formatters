@@ -10,10 +10,9 @@ import Foundation
 
 struct Formatter<T> {
     let value: T
-    let f: (T) -> String
     
-    func format() -> String {
-        return self.f(self.value)
+    func format(f: (T) -> String) -> String {
+        return f(self.value)
     }
 }
 
@@ -22,9 +21,7 @@ struct Foo {
     let int: Int
     
     func formatter() -> Formatter<Foo> {
-        return Formatter<Foo>(value: self) { foo in
-            return "\(foo.int)"
-        }
+        return Formatter<Foo>(value: self)
     }
 }
 
@@ -33,9 +30,7 @@ struct Bar {
     let string: String
     
     func formatter() -> Formatter<Bar> {
-        return Formatter<Bar>(value: self) { bar in
-            return bar.string
-        }
+        return Formatter<Bar>(value: self)
     }
 }
 
