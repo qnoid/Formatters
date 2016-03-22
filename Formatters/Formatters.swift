@@ -8,6 +8,12 @@
 
 import Foundation
 
+protocol Formatted {
+    typealias F
+    
+    func format(f: (F) -> String) -> String
+}
+
 struct Formatter<T> {
     let value: T
     
@@ -16,25 +22,27 @@ struct Formatter<T> {
     }
 }
 
-struct Foo {
+struct Foo: Formatted {
+    typealias F = Foo
     
     let int: Int
     
-    func formatter() -> Formatter<Foo> {
-        return Formatter<Foo>(value: self)
+    func format(f: (Foo) -> String) -> String {
+        return f(self)
     }
 }
 
-struct Bar {
+struct Bar: Formatted {
+    typealias F = Bar
     
     let string: String
     
-    func formatter() -> Formatter<Bar> {
-        return Formatter<Bar>(value: self)
+    func format(f: (Bar) -> String) -> String {
+        return f(self)
     }
 }
 
+
 class Formatters {
 
-    
 }

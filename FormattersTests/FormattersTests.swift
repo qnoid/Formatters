@@ -16,7 +16,7 @@ class FormattersTests: XCTestCase {
     {
         let foo = Foo(int: 1)
         
-        XCTAssertEqual("1", foo.formatter().format  { foo in
+        XCTAssertEqual("1", foo.format  { foo in
             return "\(foo.int)"
             }
         )
@@ -26,9 +26,39 @@ class FormattersTests: XCTestCase {
     {
         let bar = Bar(string: "foo")
         
-        XCTAssertEqual("foo", bar.formatter().format { bar in
+        XCTAssertEqual("foo", bar.format { bar in
             return bar.string
             }
         )
+    }
+    
+    func testBoth()
+    {
+        XCTAssertEqual("1", Foo(int: 1).format  { foo in
+            return "\(foo.int)"
+            }
+        )
+        
+        XCTAssertEqual("foo", Bar(string: "foo").format  { bar in
+            return bar.string
+            }
+        )
+    }
+    
+    func testFormatted()
+    {
+        XCTAssertEqual("1", format(Foo(int: 1),  f: { foo in
+            return "\(foo.int)"
+            }
+        ))
+
+        XCTAssertEqual("foo", format(Bar(string: "foo"), f: { bar in
+            return bar.string
+            }
+        ))
+    }
+    
+    func format<T: Formatted>(formatted: T, f: (T.F) -> String) -> String {
+        return formatted.format(f)
     }
 }
