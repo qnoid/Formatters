@@ -9,10 +9,10 @@
 import Foundation
 
 protocol Formatted {
-    typealias F
+    typealias Formatted
     
-    func format(f: (F) -> String) -> String
-    func formatter() -> Formatter<F>
+    func format(f: (Formatted) -> String) -> String
+    func formatter() -> Formatter<Formatted>
 }
 
 struct Formatter<T> {
@@ -24,7 +24,7 @@ struct Formatter<T> {
 }
 
 struct Foo: Formatted {
-    typealias F = Foo
+    typealias Formatted = Foo
     
     let int: Int
     
@@ -38,7 +38,7 @@ struct Foo: Formatted {
 }
 
 struct Bar: Formatted {
-    typealias F = Bar
+    typealias Formatted = Bar
     
     let string: String
     
