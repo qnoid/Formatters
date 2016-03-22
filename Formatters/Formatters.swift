@@ -12,6 +12,7 @@ protocol Formatted {
     typealias F
     
     func format(f: (F) -> String) -> String
+    func formatter() -> Formatter<F>
 }
 
 struct Formatter<T> {
@@ -30,6 +31,10 @@ struct Foo: Formatted {
     func format(f: (Foo) -> String) -> String {
         return f(self)
     }
+    
+    func formatter() -> Formatter<Foo> {
+        return Formatter<Foo>(value: self)
+    }
 }
 
 struct Bar: Formatted {
@@ -40,9 +45,8 @@ struct Bar: Formatted {
     func format(f: (Bar) -> String) -> String {
         return f(self)
     }
-}
-
-
-class Formatters {
-
+    
+    func formatter() -> Formatter<Bar> {
+        return Formatter<Bar>(value: self)
+    }
 }
