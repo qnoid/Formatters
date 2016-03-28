@@ -61,7 +61,7 @@ class FormattersTests: XCTestCase {
         )
     }
     
-    func format<T: Formatted>(formatted: T, f: (T.Formatted) -> String) -> String {
+    func format<T: Formatted>(formatted: T, f: (T) -> String) -> String {
         return formatted.format(f)
     }
     
